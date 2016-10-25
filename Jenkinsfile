@@ -1,7 +1,8 @@
 node {
 	stage 'Git Checkout'
 		git url: 'https://github.com/treselle-workbench/node_frontend_poc.git'
-	if(sh " sudo docker inspect -f {{.State.Running}} node_frontend"){
+	var clen = sh "sudo docker inspect -f {{.State.Running}} node_frontend"
+	if(clen){
 		stage 'Container cleanup'
 			sh "sudo docker stop node_frontend"
 			sh "sudo docker rm node_frontend"
