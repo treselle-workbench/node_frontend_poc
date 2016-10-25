@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 
 app.get('/', function (req, res) {
-  res.send('Weloome to node frontend container');
+  res.send('Welome to front-end container');
 });
 
 app.listen(3004, function () {
