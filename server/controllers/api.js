@@ -14,7 +14,7 @@ module.exports = {
             var apiPort = (request.params.name === 'getBreedDetail') ? 3001 : 3002;
 
             var options = {
-              host: '54.157.6.189',
+              host: '54.146.4.238',
               json: true,
               port: apiPort,
               path: apiUrl,
