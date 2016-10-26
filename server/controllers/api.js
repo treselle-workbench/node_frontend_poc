@@ -16,11 +16,20 @@ module.exports = {
             //apiParamDetail.host = (request.params.name === 'breeddetails') ? 'local.adoptapet.com' : (request.params.name === 'contentdetails') ? 'local.adoptapet.com' : '54.146.4.238';
             apiParamDetail.host = '54.146.4.238';
 
-            var options = {
+            /*var options = {
               host: '54.146.4.238', // 'local.adoptapet.com' // '54.146.4.238'
               json: true,
               port: 30001,
               path: '/breeddetails',
+              method: 'GET'
+            };
+            console.log(options);*/
+
+            var options = {
+              host: apiParamDetail.host, // 'local.adoptapet.com' // '54.146.4.238'
+              json: true,
+              port: apiParamDetail.apiPort,
+              path: apiParamDetail.apiUrl,
               method: 'GET'
             };
             console.log(options);
