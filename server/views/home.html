@@ -1,0 +1,163 @@
+ {% extends './layouts/home_default.html' %} {% block content %} {% include "./includes/head.html" %}
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<!-- <ul each={ item, i in test }>
+      <li { item }> </li> 
+      </ul> -->
+<!-- mount the tag -->
+<!-- <script>
+console.log({
+    {
+        test
+    }
+});
+</script>
+ -->
+<div class="layout--constrained">
+    <riot-tabs></riot-tabs>
+</div>
+<script src="js/riot-2.0.1.js"></script>
+<script src="js/tabs.js"></script>
+<script src="js/jquery-3.1.1.js"></script>
+
+<script>
+  //riot.mount('riot-tabs');
+</script>
+<!-- <div class="section">
+    <iframe class="iframe--tabs" src="./includes/head.html"></iframe>
+</div> -->
+
+<body>
+    <header class="l-header">
+        <div class="container">
+            <!-- <img src="images/adoptapet_bg.png"> -->
+            <h5>Non-profit pet adoption website</h5>
+        </div>
+        <nav class="m-nav-container">
+            <ul class="m-nav">
+                <li class="m-nav-item"><a href="#">Find a Pet</a></li>
+                <li class="m-nav-item"><a href="#">How it Works</a></li>
+                <li class="m-nav-item"><a href="#">Adoption Info</a></li>
+                <li class="m-nav-item"><a href="#">Pet Care &amp; Health</a></li>
+                <li class="m-nav-item"><a href="#">Get Involved</a> </li>
+                <li class="m-nav-item"><a href="#">Our Store</a></li>
+                <li class="m-nav-item"><a href="#">Join/Log in</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="flex__section">
+        <div class="container flex__section">
+            <div class="l-content">
+                <div class="m-tab">
+                    <header>
+                        <h1>Adopt the perfect pet</h1>
+                        <h4>from more than 16,000 animal shelters and rescues!</h4>
+                    </header>
+                    <section class="m-tab-section">
+                        <ul class="m-field m-tab-menu">
+                            <li class="tab is-tab-active">Dogs</li>
+                            <li class="tab">Cats</li>
+                            <li class="tab">Others</li>
+                            <li class="tab">Shelters</li>
+                        </ul>
+                        <div class="m-tab-form">
+                            <div class="flex__section section--around">
+                                <div class="m-field">
+                                    <label>Location:</label>
+                                    <input value="">
+                                </div>
+                                <div class="m-field">
+                                    <label>Breed:</label>
+                                    <input value="">
+                                </div>
+                            </div>
+                            <div class="flex__section section--around">
+                                <div class="m-field">
+                                    <label>Sex:</label>
+                                    <input value="">
+                                </div>
+                                <div class="m-field">
+                                    <label>Distance:</label>
+                                    <input value="">
+                                </div>
+                                <div class="m-field">
+                                    <label>Age:</label>
+                                    <input value="">
+                                </div>
+                            </div>
+                            <div class="flex__section section--around">
+                                <div class="m-field">
+                                    <label>Color:</label>
+                                    <input value="">
+                                </div>
+                                <div class="m-field">
+                                    <label>Size:</label>
+                                    <input value="">
+                                </div>
+                            </div>
+                            <div class="m-field m-main-search-footer">
+                                <div class="">ADVANCED SEARCH</div>
+                                <div class="">
+                                    <button class="button1" action="search" role="form" method="post">Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <aside class="l-aside">
+
+               <div style="float: left;width: 50%;">==>AAP Breeds<==
+                 <div id="aap_breeds"></div>
+               </div>
+               <div style="float: left;width: 50%;">==>AAP Content<==
+                 <div id="aap_content"></div>
+               </div>
+
+                {% for name, item in test %}
+                <ul>
+                    <li>{{ item.clan_name }}</li>
+                    <ul>
+                        {% endfor %}
+            </aside>
+        </div>
+    </section>
+</body>
+<script>
+  // aap_breeds, aap_content
+
+  function getAPIDetails(aapContainer) {
+    var apiUrl = (aapContainer === 'aap_content') ? '/api/getContentDetail' : '/api/getBreedDetail';
+    //console.info('=aapContainer=>' + aapContainer + '<=apiUrl=>' + apiUrl + '<==');
+
+    $.ajax({
+      type: "GET", // POST
+      url: apiUrl,
+      data: {
+        //params: ''
+      },
+      success: function(responseData) {//console.info(responseData);
+        var datas = responseData.response;
+        var loop = 0;
+        var htmlValue = '';
+        htmlValue += '<ul>';
+
+        for(loop in datas) {
+          htmlValue += '<li>' + datas[loop] + '</li>';
+        }
+        htmlValue += '</ul>';//console.info(htmlValue);
+
+        //var htmlValue = responseData.response;
+        $("#" + aapContainer).html(htmlValue);
+      }
+    });
+  }
+
+  // Get Breeds Details
+  getAPIDetails('aap_breeds');
+
+  // Get Content Details
+  getAPIDetails('aap_content');
+
+</script>
+<!-- /container -->
+{% endblock %}

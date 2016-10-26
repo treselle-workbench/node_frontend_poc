@@ -32,9 +32,9 @@ COPY . /opt/aap/
 
 RUN npm install
 
-### EXPOSE view model layer PORT 3003 ####
+### EXPOSE view model layer PORT 3005 ####
 
-EXPOSE  3004
+EXPOSE  3005
 
 ### Execute the nodejs application ####
 CMD [ "npm", "start" ]
