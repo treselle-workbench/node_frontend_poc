@@ -33,7 +33,7 @@ module.exports = function(server) {
         config: controller.base.others
     }, {
       method: 'GET',
-      path: '/api/{name}',
+      path: '/aap_api/{name}',
       config: controller.api.api
     }];
 

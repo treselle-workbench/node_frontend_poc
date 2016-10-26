@@ -23,7 +23,7 @@ module.exports = {
 
           
             var options = {
-              host: '54.146.4.238',
+              host: 'aap_sample.com',
               json: true,
               // port: 80,
               path: '/api_data/api_sample.json',

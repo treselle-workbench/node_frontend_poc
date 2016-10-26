@@ -7,7 +7,7 @@ var Hapi = require('hapi'),
 var fs = require('fs');
 
 // Create a server with a host, port, and options
-var server = Hapi.createServer('0.0.0.0', config.port, config.hapi.options);
+var server = Hapi.createServer('local.adoptapet.com', config.port, config.hapi.options);
 
 // Export the server to be required elsewhere.
 module.exports = server;

@@ -10,16 +10,19 @@ module.exports = {
     api: {
         handler: function(request, reply) {
 
-            var apiUrl = '/api/' + request.params.name;
-            var apiPort = (request.params.name === 'getBreedDetail') ? 3001 : 3002;
+            var apiParamDetail = {};
+            apiParamDetail.apiUrl = (request.params.name === 'user_details') ? request.params.name : '/' + request.params.name;
+            apiParamDetail.apiPort = (request.params.name === 'breeddetails') ? 3001 : (request.params.name === 'contentdetails') ? 3002 : 3003;
+            apiParamDetail.host = (request.params.name === 'breeddetails') ? 'local.adoptapet.com' : (request.params.name === 'contentdetails') ? 'local.adoptapet.com' : '54.146.4.238';
 
             var options = {
-              host: '54.146.4.238',
+              host: apiParamDetail.host, // 'local.adoptapet.com' // '54.146.4.238'
               json: true,
-              port: apiPort,
-              path: apiUrl,
+              port: apiParamDetail.apiPort,
+              path: apiParamDetail.apiUrl,
               method: 'GET'
             };
+            console.log(options);
 
             callback = function(response) {
                 var str = '';

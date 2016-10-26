@@ -12,11 +12,12 @@ console.log({
 });
 </script>
  -->
-<div class="layout--constrained">
+<!-- <div class="layout--constrained">
     <riot-tabs></riot-tabs>
 </div>
 <script src="js/riot-2.0.1.js"></script>
-<script src="js/tabs.js"></script>
+<script src="js/tabs.js"></script> -->
+
 <script src="js/jquery-3.1.1.js"></script>
 
 <script>
@@ -106,11 +107,17 @@ console.log({
             </div>
             <aside class="l-aside">
 
-               <div style="float: left;width: 50%;">==>AAP Breeds<==
-                 <div id="aap_breeds"></div>
+               <div style="float: left;width: 20%;padding: 0 5px 0 0;border-right: 1px solid gray;">
+                 <div><h4>Breeds</h4></div>
+                 <div id="breed_details"></div>
                </div>
-               <div style="float: left;width: 50%;">==>AAP Content<==
-                 <div id="aap_content"></div>
+               <div style="float: left;width: 28%;padding: 0 5px 0 10px;border-right: 1px solid gray;">
+                 <div><h4>Contents</h4></div>
+                 <div id="content_details"></div>
+               </div>
+               <div style="float: left;width: 45%;padding: 0 0 0 5px;">
+                 <div><h4>User Details</h4></div>
+                 <div id="user_details"></div>
                </div>
 
                 {% for name, item in test %}
@@ -123,11 +130,10 @@ console.log({
     </section>
 </body>
 <script>
-  // aap_breeds, aap_content
 
+  // Get API Details
   function getAPIDetails(aapContainer) {
-    var apiUrl = (aapContainer === 'aap_content') ? '/api/getContentDetail' : '/api/getBreedDetail';
-    //console.info('=aapContainer=>' + aapContainer + '<=apiUrl=>' + apiUrl + '<==');
+    var apiUrl = (aapContainer === 'content_details') ? '/aap_api/contentdetails' : (aapContainer === 'breed_details') ? '/aap_api/breeddetails' : '/aap_api/user_details';
 
     $.ajax({
       type: "GET", // POST
@@ -135,28 +141,44 @@ console.log({
       data: {
         //params: ''
       },
-      success: function(responseData) {//console.info(responseData);
-        var datas = responseData.response;
-        var loop = 0;
-        var htmlValue = '';
-        htmlValue += '<ul>';
+      success: function(responseData) {console.info(responseData);
+        if(aapContainer === 'user_details') {
+          var datas = responseData;
+          var loop = 0;
+          var htmlValue = '';
+          htmlValue += '<ul>';
 
-        for(loop in datas) {
-          htmlValue += '<li>' + datas[loop] + '</li>';
+          for(loop in datas) {
+            if(loop !== 'now') {
+              htmlValue += '<li>' + loop + ' : ' + datas[loop] + '</li>';
+            }
+          }
+          htmlValue += '</ul>';
+        } else {
+          var datas = responseData.response;
+          var loop = 0;
+          var htmlValue = '';
+          htmlValue += '<ul>';
+
+          for(loop in datas) {
+            htmlValue += '<li>' + datas[loop] + '</li>';
+          }
+          htmlValue += '</ul>';
         }
-        htmlValue += '</ul>';//console.info(htmlValue);
 
-        //var htmlValue = responseData.response;
         $("#" + aapContainer).html(htmlValue);
       }
     });
   }
 
   // Get Breeds Details
-  getAPIDetails('aap_breeds');
+  getAPIDetails('breed_details');
 
   // Get Content Details
-  getAPIDetails('aap_content');
+  getAPIDetails('content_details');
+
+  // Get Content Details
+  getAPIDetails('user_details');
 
 </script>
 <!-- /container -->
