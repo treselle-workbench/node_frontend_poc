@@ -14,7 +14,7 @@ module.exports = {
             apiParamDetail.apiUrl = (request.params.name === 'user_details') ? request.params.name : '/' + request.params.name;
             apiParamDetail.apiPort = (request.params.name === 'breeddetails') ? 3001 : (request.params.name === 'contentdetails') ? 3002 : 3003;
             //apiParamDetail.host = (request.params.name === 'breeddetails') ? 'local.adoptapet.com' : (request.params.name === 'contentdetails') ? 'local.adoptapet.com' : '54.146.4.238';
-            apiParamDetail.host = '54.146.4.238';
+            apiParamDetail.host = 'ec2-54-146-4-238.compute-1.amazonaws.com';
 
             /*var options = {
               host: '54.146.4.238', // 'local.adoptapet.com' // '54.146.4.238'
